@@ -18,13 +18,14 @@ public class DbConnect {
 
         //senData();
 
-        //Class.forName("org.h2.Driver");
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("org.h2.Driver");
+        //Class.forName("com.mysql.cj.jdbc.Driver");
 
-        //Connection conn = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test", "sa", "");
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/users", "root", "root");
+        Connection conn = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test", "sa", "");
+        //Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/users?useUnicode=true&serverTimezone=UTC", "root", "root");
 
         PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO TEST.PUBLIC.USERS (NAME , PASSWORD) Values (?, ?)");
+        //PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO users.users (NAME , PASSWORD) Values (?, ?)");
         preparedStatement.setString(1, name);
         preparedStatement.setString(2, pass);
 
@@ -42,12 +43,6 @@ public class DbConnect {
             System.out.println(resultSet.getString("Name"));
             System.out.println(resultSet.getString("Password"));
         }
-
-     /*   PreparedStatement prepar = conn.prepareStatement("INSERT INTO TEST.PUBLIC.USERS (NAME , PASSWORD) Values (?, ?)");
-        prepar.setString(1, "Val");
-        prepar.setString(2, "1234");
-
-        prepar.executeUpdate();*/
     }
 }
 
