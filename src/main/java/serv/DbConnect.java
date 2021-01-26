@@ -20,10 +20,6 @@ public  class DbConnect {
 
      void insertDB(String name, String pass) throws Exception {
 
-        //Class.forName("org.h2.Driver");
-
-        //Connection conn = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test", "sa", "");
-
         PreparedStatement preparedStatement = senData().prepareStatement("INSERT INTO TEST.PUBLIC.USERS (NAME , PASSWORD) Values (?, ?)");
         preparedStatement.setString(1, name);
         preparedStatement.setString(2, pass);

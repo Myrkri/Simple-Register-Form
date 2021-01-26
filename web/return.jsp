@@ -1,12 +1,4 @@
 
-<%--
-  Created by IntelliJ IDEA.
-  User: Валентин
-  Date: 26.01.2021
-  Time: 17:42
-  To change this template use File | Settings | File Templates.
---%>
-
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <html>
@@ -44,13 +36,12 @@
 </head>
 <body>
 <div class="container">
-    <form name="returner" method="post">
+    <form name="returner" method="get">
         <label for="name"><b>Name</b></label>
         <input type="text" placeholder="Enter Your Name" name="name" id="name">
 
         <button type="submit" class="registerbtn">Search</button>
     </form>
 </div>
-
 </body>
 </html>

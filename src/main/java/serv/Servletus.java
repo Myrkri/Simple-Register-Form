@@ -11,7 +11,7 @@ public class Servletus extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         try {
-            processRequests(req, resp);
+            underProcess(req, resp);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -30,7 +30,7 @@ public class Servletus extends HttpServlet {
         String name = req.getParameter("name");
         String pass = req.getParameter("psw");
 
-        //req.getRequestDispatcher("index.jsp").forward(req, resp);
+ //       req.getRequestDispatcher("index.jsp").forward(req, resp);
 
         if (name != null && pass != null) {
             System.out.println(name);
@@ -43,15 +43,16 @@ public class Servletus extends HttpServlet {
             }
         }
 
-        //underProcess(req, resp);
-        resp.sendRedirect(req.getContextPath() + "/return.jsp");
+        resp.sendRedirect(req.getContextPath() + "/servlet");
+
         //req.getRequestDispatcher("return.jsp").forward(req, resp);
     }
     private void underProcess(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-       // req.getRequestDispatcher("return.jsp").forward(req, resp);
+
+       req.getRequestDispatcher("return.jsp").forward(req, resp);
 
         String name = req.getParameter("name");
-
+        System.out.println(name);
         //db.selectData(name);
     }
 
