@@ -1,5 +1,5 @@
 <%-- Created by IntelliJ IDEA. --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
   <head>
     <title>Registration</title>
@@ -23,8 +23,15 @@
         width: 100%;
         opacity: 0.9;
       }
-      input[type=submit]:hover {
-        background-color: #45a049;
+      .checker {
+          background-color: #4CAF50;
+          color: white;
+          padding: 16px 20px;
+          margin: 8px 0;
+          border: none;
+          cursor: pointer;
+          width: 100%;
+          opacity: 0.9;
       }
       div.container {
         border-radius: 5px;
@@ -35,7 +42,7 @@
   </head>
   <body>
   <div class="container">
-  <form method="post">
+  <form name="home" action="servlet"  method="post">
       <h1>Register</h1>
 
       <label for="name"><b>Name</b></label>
@@ -45,6 +52,8 @@
       <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
 
       <button type="submit" class="registerbtn">Register</button>
+      <button id=checker name="checker" type="button" class="checker">Search for a user</button>
+
   </form>
   </div>
   </body>

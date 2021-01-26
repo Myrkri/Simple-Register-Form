@@ -1,44 +1,58 @@
 package serv;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 public class Servletus extends HttpServlet {
 
     DbConnect db = new DbConnect();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        processRequests(req, resp);
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
+        try {
+            processRequests(req, resp);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        processRequests(req, resp);
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+        try {
+            processRequests(req, resp);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    private void processRequests(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private void processRequests(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         String name = req.getParameter("name");
         String pass = req.getParameter("psw");
 
-        req.getRequestDispatcher("index.jsp").forward(req, resp);
-
+        //req.getRequestDispatcher("index.jsp").forward(req, resp);
 
         if (name != null && pass != null) {
             System.out.println(name);
             System.out.println(pass);
 
             try {
-                //  db.senData();
                 db.insertDB(name, pass);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
+
+        //underProcess(req, resp);
+        resp.sendRedirect(req.getContextPath() + "/return.jsp");
+        //req.getRequestDispatcher("return.jsp").forward(req, resp);
+    }
+    private void underProcess(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+       // req.getRequestDispatcher("return.jsp").forward(req, resp);
+
+        String name = req.getParameter("name");
+
+        //db.selectData(name);
     }
 
 }
