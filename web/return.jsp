@@ -43,7 +43,7 @@
         <button type="submit" class="registerbtn">Search</button>
     </form>
 </div>
-<p> User: ${user}</p>
-<p> Password: ${password}</p>
+    <strong><p style="font-size: 160%; text-align:center;"> User: ${user}</p></strong>
+    <strong><p style="font-size: 160%; text-align:center;">Password: ${password}</p></strong>
 </body>
 </html>

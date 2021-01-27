@@ -30,7 +30,7 @@ public  class DbConnect {
             senData().close();
         }catch (JdbcSQLIntegrityConstraintViolationException ex){
 
-            System.out.println("Username already exists!");                //TODO спросить про способ вывода всплывающего сообщения в браузере
+            System.out.println("Username already exists!");
             check = false;
         }
         return check;

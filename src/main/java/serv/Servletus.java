@@ -45,6 +45,7 @@ public class Servletus extends HttpServlet {
 
                  if (!errCheck) {
                     req.setAttribute("err", "Username already exists!");
+
                 }
 
             } catch (Exception e) {
