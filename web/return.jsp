@@ -43,5 +43,7 @@
         <button type="submit" class="registerbtn">Search</button>
     </form>
 </div>
+<p> User: ${user}</p>
+<p> Password: ${password}</p>
 </body>
 </html>

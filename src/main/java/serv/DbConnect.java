@@ -34,17 +34,18 @@ public  class DbConnect {
         }
     }
 
-    void selectData(String name) throws Exception {
+    ResultSet selectData(String name) throws Exception {
 
-        PreparedStatement preparedStatement = senData().prepareStatement("SELECT * from TEST.PUBLIC.USERS");
+        PreparedStatement preparedStatement = senData().prepareStatement("SELECT * from TEST.PUBLIC.USERS where NAME=?");
+        preparedStatement.setString(1, name);
 
         ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()) {
+       /* while (resultSet.next()) {
             System.out.println(resultSet.getString("Name"));
             System.out.println(resultSet.getString("Password"));
-        }
+        }*/
         senData().close();
-
+        return resultSet;
     }
 }
 

@@ -3,6 +3,7 @@ package serv;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.ResultSet;
 
 public class Servletus extends HttpServlet {
 
@@ -49,11 +50,27 @@ public class Servletus extends HttpServlet {
     }
     private void underProcess(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 
-       req.getRequestDispatcher("return.jsp").forward(req, resp);
-
         String name = req.getParameter("name");
+
+        String userName = "";
+        String pass = "";
+
         System.out.println(name);
-        //db.selectData(name);
+
+        ResultSet result = db.selectData(name);
+
+        while (result.next()) {
+            userName = result.getString("Name");
+            pass = result.getString("Password");
+
+            System.out.println("Uswers " + userName);
+            System.out.println("Passes " + pass);
+        }
+
+        req.setAttribute("user", userName);
+        req.setAttribute("password", pass);
+        req.getRequestDispatcher("return.jsp").forward(req, resp);
+
     }
 
 }
