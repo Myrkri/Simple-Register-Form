@@ -52,9 +52,13 @@
       <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
 
       <button type="submit" class="registerbtn">Register</button>
-      <button id=checker name="checker" type="button" class="checker">Search for a user</button>
+
+      <p>${err}</p>
 
   </form>
+      <form method="post" action="${pageContext.request.contextPath}/servlet">
+          <input name="checker" type="submit" value="Search" class="checker"/>
+      </form>
   </div>
   </body>
 </html>

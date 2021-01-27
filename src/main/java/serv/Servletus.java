@@ -3,9 +3,11 @@ package serv;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.sql.ResultSet;
 
 public class Servletus extends HttpServlet {
+
 
     DbConnect db = new DbConnect();
 
@@ -19,34 +21,37 @@ public class Servletus extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
-        try {
-            processRequests(req, resp);
-        } catch (Exception e) {
-            e.printStackTrace();
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+
+        if (req.getParameter("checker") != null) {
+            resp.sendRedirect(req.getContextPath() + "/servlet");
+        } else {
+            try {
+                processRequests(req, resp);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
     private void processRequests(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         String name = req.getParameter("name");
         String pass = req.getParameter("psw");
-
- //       req.getRequestDispatcher("index.jsp").forward(req, resp);
+        boolean errCheck;
 
         if (name != null && pass != null) {
-            System.out.println(name);
-            System.out.println(pass);
-
             try {
-                db.insertDB(name, pass);
+                errCheck = db.insertDB(name, pass);
+
+                 if (!errCheck) {
+                    req.setAttribute("err", "Username already exists!");
+                }
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-
-        resp.sendRedirect(req.getContextPath() + "/servlet");
-
-        //req.getRequestDispatcher("return.jsp").forward(req, resp);
+        req.getRequestDispatcher("index.jsp").forward(req, resp);
     }
     private void underProcess(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 
@@ -55,22 +60,16 @@ public class Servletus extends HttpServlet {
         String userName = "";
         String pass = "";
 
-        System.out.println(name);
-
         ResultSet result = db.selectData(name);
 
         while (result.next()) {
             userName = result.getString("Name");
             pass = result.getString("Password");
-
-            System.out.println("Uswers " + userName);
-            System.out.println("Passes " + pass);
         }
 
         req.setAttribute("user", userName);
         req.setAttribute("password", pass);
         req.getRequestDispatcher("return.jsp").forward(req, resp);
-
     }
 
 }

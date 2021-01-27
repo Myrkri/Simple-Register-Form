@@ -18,7 +18,8 @@ public  class DbConnect {
                     getConnection("jdbc:h2:tcp://localhost/~/test", "sa", "");
         }
 
-     void insertDB(String name, String pass) throws Exception {
+     boolean insertDB(String name, String pass) throws Exception {
+            boolean check = true;
 
         PreparedStatement preparedStatement = senData().prepareStatement("INSERT INTO TEST.PUBLIC.USERS (NAME , PASSWORD) Values (?, ?)");
         preparedStatement.setString(1, name);
@@ -30,8 +31,9 @@ public  class DbConnect {
         }catch (JdbcSQLIntegrityConstraintViolationException ex){
 
             System.out.println("Username already exists!");                //TODO спросить про способ вывода всплывающего сообщения в браузере
-
+            check = false;
         }
+        return check;
     }
 
     ResultSet selectData(String name) throws Exception {
@@ -40,11 +42,9 @@ public  class DbConnect {
         preparedStatement.setString(1, name);
 
         ResultSet resultSet = preparedStatement.executeQuery();
-       /* while (resultSet.next()) {
-            System.out.println(resultSet.getString("Name"));
-            System.out.println(resultSet.getString("Password"));
-        }*/
+
         senData().close();
+
         return resultSet;
     }
 }
